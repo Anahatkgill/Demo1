@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Certs Event</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        header {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            z-index: 10;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 10px;
+        }
+
+        .nav-links a:hover{
+            color: #616161;
+        }
+        
+        .btn {
+            padding: 5px 10px;
+            background-color: #a09e26;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 10px;
+            margin: 10px;
+        }
+        .btn a{
+            text-decoration: none;
+            color: #000;
+        }
+        .btn a:hover{
+            color: #757575;
+        }
+        
+        .header-carousel {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .header-carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-boxes {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .info-box {
+            flex: 1;
+            margin: 5px;
+            padding: 5px;
+            background-color: rgba(104, 103, 107, 0.8);
+            text-align: center;
+            font-size: 10px;
+            color: #000;
+            transition: transform 0.3s ease-in-out;
+        }
+        .info-box:hover{
+            transform: translateY(-5px);
+        }
+
+        .para {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+
+        #yellow {
+            color: yellow;
+        }
+
+        .content-section {
+            display: flex;
+            padding: 20px;
+            color: white;
+        }
+
+        .content-section img {
+            max-width: 100%;
+            height: 100%;
+            margin-right: 20px;
+        }
+
+        .content-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .collapsible-section {
+            margin-top: 20px;
+        }
+
+        .collapsible {
+            background-color: #030303;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        
+        .collapsible:after {
+            content: '+';
+            color: white;
+            font-weight: bold;
+            float: right;
+        }
+        
+        .collapsible.active:after {
+            content: '-';
+        }
+        
+        .content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            color: white;
+            border-top: 1px solid #000000;
+            padding: 0 15px;
+        }
+        
+        .content p {
+            margin: 10px 0;
+        }
+        
+
+        .active:after {
+            content: '-';
+        }
+
+        .image-section {
+            display: flex;
+        }
+        
+        .image-container {
+            position: relative;
+            flex: 1;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+            color: white;
+            text-align: center;
+        }
+        
+        .image-btn {
+            padding: 10px 20px;
+            background-color: #a09e26;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        
+        .image-btn:hover {
+            background-color: #6b6a17;
+            transition: background-color 0.3s;
+        } 
+
+        footer {
+            background-color: #000;
+            color: white;
+            padding: 20px 40px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter {
+            margin-bottom: 20px;
+        }
+        
+        .newsletter h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        
+        .newsletter form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .newsletter input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .newsletter button {
+            padding: 10px;
+            background-color: #a09e26;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .newsletter button:hover {
+            background-color: #6b6a17;
+            transition: background-color 0.3s;
+        }
+        
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+            margin-left: 40px;
+        }
+        
+        .footer-section {
+            margin-right: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            padding-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                margin-left: 0;
+            }
+        
+            .footer-section {
+                margin-right: 0;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+        
+            .footer-logo-section {
+                align-items: center;
+            }
+        }
+        
+       
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 15px;
+            }
+        
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        
+            .nav-links li {
+                margin: 10px 0;
+            }
+        
+            header {
+                height: 200px;
+            }
+        
+            .header-carousel img {
+                height: 200px;
+            }
+
+            .info-boxes {
+                flex-wrap: wrap;
+            }
+
+            .info-box {
+                flex: 1 1 45%; 
+                margin: 10px;
+            }
+
+            .content-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content-section img {
+                margin: 0 auto 20px;
+            }
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.png" alt="AI Certs Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#schedule">Certification</a></li>
+                <li><a href="#speakers">Authorized Partners</a></li>
+                <li><a href="#contact">Authorized Trainers</a></li>
+                <li><a href="#contact">Resources</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="btn"><a href="#">Get Certificate</a></button>
+        </nav>
+        <div class="header-carousel">
+            <img id="header-img" src="M.jfif" alt="Header Image">
+        </div>
+    </header>
+    <div class="info-boxes">
+        <div class="info-box">Box 1</div>
+        <div class="info-box">Box 2</div>
+        <div class="info-box">Box 3</div>
+        <div class="info-box">Box 4</div>
+        <div class="info-box">Box 5</div>
+        <div class="info-box">Box 6</div>
+        <div class="info-box">Box 7</div>
+        <div class="info-box">Box 8</div>
+        <div class="info-box">Box 9</div>
+        <div class="info-box">Box 10</div>
+    </div>
+    <div class="para">
+        <p>What we do</p>
+        <br>
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Tenetur labore nostrum nisi repudiandae <br>ea voluptate culpa quam obcaecati itaque maiores?</h2>
+        <p id="yellow">Join us in our mission to shape the Blockchain and the AI industry</p>
+    </div>
+
+    <section class="content-section">
+        <img src="Sun.jfif" alt="Descriptive Alt Text">
+        <div class="content-text">
+            <p>Values</p>
+            <h2>Why AI CERTs?</h2>
+            <div class="collapsible-section">
+                <button class="collapsible">+ Social Impacts and Global Vision</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel enim quis ex tristique tincidunt non non risus.</p>
+                </div>
+                <button class="collapsible">+ Comprehensive AI Certification Portfolio</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel enim quis ex tristique tincidunt non non risus.</p>
+                </div>
+                <button class="collapsible">+ Pioneering in AI and Blockchain Convergence</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel enim quis ex tristique tincidunt non non risus.</p>
+                </div>
+                <button class="collapsible">+ Innovative Certification Testing</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel enim quis ex tristique tincidunt non non risus.</p>
+                </div>
+                <button class="collapsible">+ Expertise-Driven Team</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel enim quis ex tristique tincidunt non non risus.</p>
+                </div>
+                <button class="collapsible">+ Extensive Network of Subject Matter Experts</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel enim quis ex tristique tincidunt non non risus.</p>
+                </div>
+                <button class="collapsible">+ Industry Recognition and Validation</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel enim quis ex tristique tincidunt non non risus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="image-section">
+        <div class="image-container">
+            <img src="M.jfif" alt="Image 1">
+            <div class="overlay">
+                <h3>Professional Certification </h3>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <button class="image-btn">Button 1</button>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="W.jfif" alt="Image 2">
+            <div class="overlay">
+                <h3>Technical Certification</h3>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <button class="image-btn">Button 2</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo-section">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="AI Certs Logo">
+                </div>
+                <div class="newsletter">
+                    <h3>Newsletter</h3>
+                    <form>
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Certification</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Authorized</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AI Certs. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    
+
+    <script>
+        const collapsibles = document.querySelectorAll(".collapsible");
+        collapsibles.forEach((collapsible) => {
+            collapsible.addEventListener("click", function () {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+    
+        let carouselIndex = 0;
+        const images = ["M.jfif", "W.jfif", "Snoopy.jfif"];
+        const carouselImage = document.getElementById("header-img");
+    
+        function changeImage() {
+            carouselIndex = (carouselIndex + 1) % images.length;
+            carouselImage.src = images[carouselIndex];
+        }
+    
+        setInterval(changeImage, 6000);
+    </script>
+    
+</body>
+</html>
+
+
+
+
+
